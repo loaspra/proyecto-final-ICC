@@ -8,6 +8,17 @@
 
 }
 
+.uploadbtn {
+	background-color: #d5283f;
+	color: white;
+}
+
+.uploadbtn:hover {
+	background-color: white;
+	color:#e84a5f;
+	border: 1px solid #000000;
+}
+
 .u_form-logo {
   height: 40vmin;
   pointer-events: none;

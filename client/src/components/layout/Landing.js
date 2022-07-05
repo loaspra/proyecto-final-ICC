@@ -1,26 +1,77 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { View, Text} from "react-native-web";
+import { fadeIn } from "react-animations";
+import Radium, {StyleRoot} from "radium";
+import { Box, alpha} from "@mui/material";
+
+import background from "./background.jpg";
 import "./style.css";
 
-class Landing extends Component {
+
+const stails ={
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	big: {
+		position: 'absolute', 
+		top: 0, 
+		left: 0, 
+		right: 0, 
+		bottom: 0, 
+		justifyContent: 'center', 
+		alignItems: 'center'
+	},
+
+	box: {
+		borderRadius: '5px',
+		color: 'primary.main',
+		fontWeight: 'medium',
+		alignItems: 'center',
+		backgroundColor: alpha('#2e0b1b', 0.9),
+		p: 5
+	},
+
+	baseText: {
+		fontSize: 20,
+		color: 'white',
+	  },
+	  
+	  titleText: {
+		fontSize: 50,
+		fontWeight: "bold",
+		color: 'cyan'
+	  }
+}
+
+
+class Landing extends React.Component {
+ 
 	render() {
 		return (
-			<div className="container col-12">
-				<div className="jumbotron jumbotron-fluid col-10 offset-1 text-center">
-					<h2>Probando la autenticacion en ReactJS y MongoDB</h2>
-					<h5>via JWTs y passport</h5>
-				</div>
+			<div style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', minheight: '100%',
+			height: '100vh',
+			position: 'relative'}}>
+				<StyleRoot>
+					<div style={stails.fadeIn}>
+						<View style={stails.big}>
+							<Box sx={stails.box}>
+								<Text style={stails.titleText}>Hola! Inicia Sesion o Registrate</Text>
+								<br />
+								<Text style={stails.baseText}>¡Extrae texto de tus imágenes y conviértelo en audio!</Text>
+							{/* Links to Register & Login */}
+								<div>
+									{/* Register */}
+									<Link to="/register" className="btn registerButton">Registrarse</Link>
 
-				{/* Links to Register & Login */}
-				<div className="row">
-					<div className="col-sm-10 offset-1 text-center">
-						{/* Register */}
-						<Link to="/register" className="btn registerButton">Registrarse</Link>
-
-						{/* Login */}
-						<Link to="/login" className="btn loginButton">Iniciar Sesion</Link>
+									{/* Login */}
+									<Link to="/login" className="btn loginButton">Iniciar Sesion</Link>
+								</div>
+							</Box>
+						</View>
 					</div>
-				</div>
+				</StyleRoot>
 			</div>
 		);
 	}

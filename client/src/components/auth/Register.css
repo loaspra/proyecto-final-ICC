@@ -3,20 +3,20 @@
 }
 
 .registerText {
-	color: white;
+	color: rgba(255, 255, 255, 0.896);
 }
 
 .link {
-	color: #e84a5f;
+	color: #274c73;
 }
 
 .link:hover {
-	color: #e84a5f;
+	color: #00d0ff;
 	text-decoration: underline;
 }
 
 label {
-	color: #e84a5f;
+	color: #362c88;
 }
 
 .form-control {
@@ -25,12 +25,12 @@ label {
 
 .signupbtn {
 	margin: 10px;
-	background-color: #e84a5f;
-	color: white;
+	background-color: #dd0058;
+	color: rgb(40, 40, 40);
 }
 
 .signupbtn:hover {
-	background-color: white;
-	color: #e84a5f;
-	border: 1px solid #e84a5f;
+	background-color: #ff9696;
+	color: #585252d5;
+	border: 1px solid #000000;
 }

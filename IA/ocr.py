@@ -4,7 +4,7 @@ import keras_ocr
 from gtts import gTTS
 
 pipeline = keras_ocr.pipeline.Pipeline()
-filename = sys.argv[1]
+filename = "../uploads/lorem.jpg"# sys.argv[1]
 
 print("Resultados del archivo:" + filename)
 images = keras_ocr.tools.read("./uploads/" + filename)

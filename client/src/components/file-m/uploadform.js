@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {Text, StyleSheet, View} from  'react-native';
-
+import { FileUploader } from "react-drag-drop-files";
 import axios from 'axios';
 import './styles.css';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Box, alpha} from "@mui/material";
 import Paper from '@mui/material/Paper';
 
 const BASE_URL = 'http://localhost:3001/';
+const fileTypes = ["JPEG", "PNG", "JPG"];
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#EEE',
@@ -28,10 +28,25 @@ var styles = StyleSheet.create({headline: {
 	subtitle: { textAlign: 'center', // <-- the magic
     fontSize: 20,
     marginTop: 10,
-    backgroundColor: 'Gray'}
+    backgroundColor: 'Gray',
+	color: 'white'}
 })  
 
+const stails ={
+	big: {
+		position: 'absolute', 
+		top: 0, 
+		left: 0, 
+		right: 0, 
+		bottom: 0, 
+		justifyContent: 'center', 
+		alignItems: 'center'
+	},
+}
+
+
 class U_form extends Component {
+
 	constructor(props) {
 	
 	super(props);
@@ -41,13 +56,11 @@ class U_form extends Component {
 		id: this.props.id,
 		rest: this.props.rest
 	  }   
-	  console.log("Construction U_form object with");
-	  console.log(this.state.id);
-	  console.log(this.state.rest);
 	};
 
 	changeHandler = event=>{
-	var uploadFile = event.target.files[0];    
+		console.log(event.item(0))
+	var uploadFile = event.item(0);    
 		if(this.validateFileSize(event)){
 		  this.setState({
 			selectedFile: uploadFile
@@ -61,9 +74,10 @@ class U_form extends Component {
 		console.log("No tienes conversiones restantes")
 		return;
 	}
+
 	formData.append('file', this.state.selectedFile)    
 	formData.append('id', this.state.id)
-	console.log("hello> " + this.state.id)
+	
 	axios.post(BASE_URL + 'upload', formData)
 	  .then(res => {
 		// toast.success('File uploaded successfully')
@@ -81,7 +95,7 @@ class U_form extends Component {
 	};
   
 	validateFileSize=(event)=>{
-		let uploadFile = event.target.files[0];
+		let uploadFile = event.item(0);
 		let size = 15000000;
 		let err = '';	  
 		if (uploadFile.size > size) {
@@ -92,38 +106,26 @@ class U_form extends Component {
 	};
 	// <ToastContainer /> linea 105
 
+	
+
 	render() {
 	  return (
-			<View>
-				<Text style={styles.subtitle}>Te quedan {this.state.rest} conversiones a texto restantes</Text>
-				<Text style={styles.subtitle}>Carga del Archivo</Text>
-		<Box sx={{ flexGrow: 1 }}>
-		<Grid
-			container
-			spacing={10}
-			direction="column"
-			alignItems="center"
-			justifyContent="center"
-			style={{ minHeight: '30vh' }}
-		>
-		  <Grid item xs={4}>
-		  <form method="post" action="#" id="#">
-		 			<div className="form-group files">
-
-		 				<input type="file" name="file" className="form-control" onChange={this.changeHandler}/>
-		 			</div>
-		 			<div className="col-md-6 pull-right">
-		 				<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Cargar Archivo</button>
-		 			</div>
-		 		</form>
-		  </Grid>
-		  <Grid item xs={8}>
-			<Item>{this.state.respuesta}</Item>
-		  </Grid>
-		</Grid>
-		<br />
-	  </Box>
-	  </View>
+	<View sx={stails.big}>
+		<Text style={styles.subtitle}>Te quedan {this.state.rest} conversiones a texto restantes</Text>
+		<Text style={styles.subtitle}>Carga del Archivo</Text>
+		<br/>
+		<FileUploader
+			multiple={true}
+			handleChange={this.changeHandler}
+			name="file"
+			types={fileTypes}
+		/>
+		<Text style={styles.subtitle}>{this.state.file ? `File name: ${this.state.file.name}` : "Nigún archivo seleccionado aún"}</Text>
+		<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Cargar Archivo</button>
+		<View style={{ backgroundColor: "black"}}>
+			<Text style={styles.subtitle}>{this.state.respuesta}</Text>
+		</View>
+	</View>
 	  );
 	}
 }

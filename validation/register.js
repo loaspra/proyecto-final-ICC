@@ -12,31 +12,31 @@ module.exports = function validateRegisterInput(data) {
 
 	// Name checks
 	if (Validator.isEmpty(data.name)) {
-		errors.name = "Name field is required";
+		errors.name = " Un nombre es requerido";
 	}
 
 	// Email checks
 	if (Validator.isEmpty(data.email)) {
-		errors.email = "Email field is required";
+		errors.email = " Un correo es requerido";
 	} else if (!Validator.isEmail(data.email)) {
-		errors.email = "Email is invalid";
+		errors.email = " Correo inválido";
 	}
 
 	// Password checks
 	if (Validator.isEmpty(data.password)) {
-		errors.password = "Password field is required";
+		errors.password = " Una contraseña es requerida";
 	}
 
 	if (Validator.isEmpty(data.password2)) {
-		errors.password2 = "Confirm password field is required";
+		errors.password2 = " Debes reescribir tu contraseña aqui";
 	}
 
 	if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-		errors.password = "Password must be at least 6 characters";
+		errors.password = " La contraseña debe temer al menos 6 caracteres";
 	}
 
 	if (!Validator.equals(data.password, data.password2)) {
-		errors.password2 = "Passwords must match";
+		errors.password2 = " Las contraseñas no son iguales";
 	}
 
 	return {

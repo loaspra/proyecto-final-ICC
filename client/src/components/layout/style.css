@@ -1,9 +1,5 @@
-.jumbotron {
-	background-color: #2a363b;
-	border: 3px solid #e84a5f;
-	margin-top: 125px;
-	color: white;
-	font-style: italic;
+.body {
+	background-image: 'background.jpg';
 }
 
 .registerButton {

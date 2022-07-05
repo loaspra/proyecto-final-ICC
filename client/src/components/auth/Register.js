@@ -1,11 +1,53 @@
 import React, { Component } from "react";
+import { View } from "react-native-web";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import { fadeIn } from "react-animations";
+import Radium, {StyleRoot} from "radium";
+import { Box, alpha} from "@mui/material";
+import background from "../layout/background.jpg";
 import './Register.css';
 
+
+const stails ={
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	big: {
+		position: 'absolute', 
+		top: 0, 
+		left: 0, 
+		right: 0, 
+		bottom: 0, 
+		justifyContent: 'center', 
+		alignItems: 'center'
+	},
+
+	box: {
+		borderRadius: '10px',
+		color: 'primary.main',
+		fontWeight: 'medium',
+		alignItems: 'center',
+		backgroundColor: alpha('#2e0b1b', 0.7),
+		width: '50%',
+		p: 3
+	},
+
+	baseText: {
+		fontFamily: "Roboto",
+		fontSize: 20,
+		color: 'white',
+	  },
+	  titleText: {
+		fontSize: 50,
+		fontWeight: "bold",
+		color: 'cyan'
+	  }
+}
 
 class Register extends Component {
 	constructor() {
@@ -53,92 +95,102 @@ class Register extends Component {
 	render() {
 		const { errors } = this.state;
 		return (
-			<div className="container">
-				<div className="row">
-					<div className="col-sm-3 returnHome">
-						<Link to="/" className="link"><i class="fas fa-backspace"></i> Return Home</Link>
+			<div style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', minheight: '100%',
+			height: '100vh',
+			position: 'relative'}}>
+			<StyleRoot>
+			<div style={stails.fadeIn}>
+			<View style={stails.big}>
+				<Box sx={stails.box}>
+					<div className="row">
+						<div className="col-sm-3 returnHome">
+							<Link to="/" className="link"><i class="fas fa-backspace"></i> Inicio</Link>
+						</div>
 					</div>
-				</div>
 
-				<div className="row">
-					<div className="col-10 offset-1 text-center registerText">
-						<h3>Register to become a new user</h3>
-						<p>Already have an account? <Link to="/login" className="link">Log In</Link></p>
+					<div className="row">
+						<div className="col-10 offset-1 text-center registerText">
+							<h3>Registrate como nuevo usuario</h3>
+							<p>¿Ya tienes una cuenta? <Link to="/login" className="link">Inicia sesión</Link></p>
+						</div>
 					</div>
-				</div>
 
-				<div className="row">
-					<div className="col-10 offset-1 text-center">
-						<form noValidate onSubmit={this.onSubmit}>
-							{/* Name */}
-							<div className="col-8 offset-2">
-								<label htmlFor="name">Name:</label>
-								<span className="text-light">{errors.name}</span>
-								<input
-									type="text"
-									onChange={this.onChange}
-									value={this.state.name}
-									error={errors.name}
-									id="name"
-									className={classnames("form-control", { invalid: errors.name })}
-									placeholder="Enter your name..."
-								/>
-							</div>
+					<div className="row">
+						<div className="col-10 offset-1 text-center">
+							<form noValidate onSubmit={this.onSubmit}>
+								{/* Name */}
+								<div className="col-8 offset-2">
+									<label htmlFor="name">Nombre:</label>
+									<span className="text-light">{errors.name}</span>
+									<input
+										type="text"
+										onChange={this.onChange}
+										value={this.state.name}
+										error={errors.name}
+										id="name"
+										className={classnames("form-control", { invalid: errors.name })}
+										placeholder="Ingresa tu nombre"
+									/>
+								</div>
 
-							{/* Email */}
-							<div className="col-8 offset-2">
-								<label htmlFor="email">Email:</label>
-								<span className="text-light">{errors.email}</span>
-								<input
-									type="email"
-									onChange={this.onChange}
-									value={this.state.email}
-									error={errors.email}
-									id="email"
-									className={classnames("form-control", { invalid: errors.email })}
-									placeholder="Enter your email..."
-								/>
-							</div>
+								{/* Email */}
+								<div className="col-8 offset-2">
+									<label htmlFor="email">Correo:</label>
+									<span className="text-light">{errors.email}</span>
+									<input
+										type="email"
+										onChange={this.onChange}
+										value={this.state.email}
+										error={errors.email}
+										id="email"
+										className={classnames("form-control", { invalid: errors.email })}
+										placeholder="Ingresa tu correo"
+									/>
+								</div>
 
-							{/* Password */}
-							<div className="col-8 offset-2">
-								<label htmlFor="password">Password:</label>
-								<span className="text-light">{errors.password}</span>
-								<input
-									type="password"
-									onChange={this.onChange}
-									value={this.state.password}
-									error={errors.password}
-									id="password"
-									className={classnames("form-control", { invalid: errors.password })}
-									placeholder="Enter a password..."
-								/>
-							</div>
+								{/* Password */}
+								<div className="col-8 offset-2">
+									<label htmlFor="password">Contraseña:</label>
+									<span className="text-light">{errors.password}</span>
+									<input
+										type="password"
+										onChange={this.onChange}
+										value={this.state.password}
+										error={errors.password}
+										id="password"
+										className={classnames("form-control", { invalid: errors.password })}
+										placeholder="Crea una contraseña"
+									/>
+								</div>
 
-							{/* Validate password */}
-							<div className="col-8 offset-2">
-								<label htmlFor="password2">Confirm Password:</label>
-								<span className="text-light">{errors.password2}</span>
-								<input
-									type="password"
-									onChange={this.onChange}
-									value={this.state.password2}
-									error={errors.password2}
-									id="password2"
-									className={classnames("form-control", { invalid: errors.password2 })}
-									placeholder="Re-type your password..."
-								/>
-							</div>
+								{/* Validate password */}
+								<div className="col-8 offset-2">
+									<label htmlFor="password2">Confirmar contraseña:</label>
+									<span className="text-light">{errors.password2}</span>
+									<input
+										type="password"
+										onChange={this.onChange}
+										value={this.state.password2}
+										error={errors.password2}
+										id="password2"
+										className={classnames("form-control", { invalid: errors.password2 })}
+										placeholder="Repite tu contraseña"
+									/>
+								</div>
 
-							{/* Submit button */}
-							<div className="col-8 offset-2">
-								<button className="btn signupbtn" type="submit">
-									Sign up
-			 	  				</button>
-							</div>
-						</form>
+								{/* Submit button */}
+								<div className="col-8 offset-2">
+									<button className="btn signupbtn" type="submit">
+										Registrarse
+									</button>
+								</div>
+							</form>
+						</div>
 					</div>
-				</div>
+				</Box>
+			</View>
+			</div>
+			</StyleRoot>
 			</div>
 		);
 	}

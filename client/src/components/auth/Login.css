@@ -25,12 +25,12 @@ label {
 
 .loginbtn {
 	margin: 10px;
-	background-color: #e84a5f;
-	color: white;
+	background-color: #dd0058;
+	color: rgb(40, 40, 40);
 }
 
 .loginbtn:hover {
-	background-color: white;
-	color: #e84a5f;
-	border: 1px solid #e84a5f;
+	background-color: #ff9696;
+	color: #585252d5;
+	border: 1px solid #000000;
 }
