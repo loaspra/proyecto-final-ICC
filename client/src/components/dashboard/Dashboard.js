@@ -7,7 +7,6 @@ import './style.css';
 import Radium, {StyleRoot} from "radium";
 import { Box, alpha} from "@mui/material";
 import background from "../layout/background.jpg";
-
 import { fadeIn } from "react-animations"; 
 import U_form from "../file-m/uploadform";
 

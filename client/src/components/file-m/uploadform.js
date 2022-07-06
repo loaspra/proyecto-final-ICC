@@ -5,6 +5,7 @@ import axios from 'axios';
 import './styles.css';
 import { styled } from '@mui/material/styles';
 import { Box, alpha} from "@mui/material";
+import Spinner from 'react-spinner-material';
 import Paper from '@mui/material/Paper';
 
 const BASE_URL = 'http://localhost:3001/';
@@ -29,7 +30,14 @@ var styles = StyleSheet.create({headline: {
     fontSize: 20,
     marginTop: 10,
     backgroundColor: 'Gray',
-	color: 'white'}
+	color: 'white'},
+
+	normal: { textAlign: 'center', // <-- the magic
+    fontSize: 13,
+    marginTop: 5,
+	marginBottom: 10,
+    backgroundColor: 'Gray',
+	color: 'gray'}
 })  
 
 const stails ={
@@ -46,7 +54,6 @@ const stails ={
 
 
 class U_form extends Component {
-
 	constructor(props) {
 	
 	super(props);
@@ -54,16 +61,27 @@ class U_form extends Component {
 		selectedFile: null,
 		respuesta: 'Aqui aparecera el texto identificado',
 		id: this.props.id,
-		rest: this.props.rest
+		rest: this.props.rest,
+		hide: false
 	  }   
 	};
 
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.respuesta !== this.state.respuesta) {
+			// llego la respuesta
+			this.setState({
+				// respuesta: 'Aqui aparecera el texto identificado',
+				hide: false
+				}
+			)
+		}
+	}
+
 	changeHandler = event=>{
-		console.log(event.item(0))
 	var uploadFile = event.item(0);    
 		if(this.validateFileSize(event)){
 		  this.setState({
-			selectedFile: uploadFile
+			selectedFile: uploadFile,
 		  });
 		}
 	}
@@ -74,7 +92,7 @@ class U_form extends Component {
 		console.log("No tienes conversiones restantes")
 		return;
 	}
-
+	this.setState({hide: true})
 	formData.append('file', this.state.selectedFile)    
 	formData.append('id', this.state.id)
 	
@@ -84,12 +102,10 @@ class U_form extends Component {
 		// pass the name of the file as a parameter to the script (OCR)
 			this.setState({respuesta: res.data.results});
 			this.setState({rest: res.data.restante})
-			console.log(res.data.results);
 			console.log("Conversiones restantes: " + this.state.rest);
 			this.forceUpdate();
 	  })
 	  .catch(err => {
-		// toast.error('File upload failed')
 		console.log(err)
 	  })
 	};
@@ -104,7 +120,6 @@ class U_form extends Component {
 		}
 		return true
 	};
-	// <ToastContainer /> linea 105
 
 	
 
@@ -113,18 +128,22 @@ class U_form extends Component {
 	<View sx={stails.big}>
 		<Text style={styles.subtitle}>Te quedan {this.state.rest} conversiones a texto restantes</Text>
 		<Text style={styles.subtitle}>Carga del Archivo</Text>
-		<br/>
-		<FileUploader
-			multiple={true}
-			handleChange={this.changeHandler}
-			name="file"
-			types={fileTypes}
-		/>
-		<Text style={styles.subtitle}>{this.state.file ? `File name: ${this.state.file.name}` : "Nigún archivo seleccionado aún"}</Text>
-		<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Cargar Archivo</button>
-		<View style={{ backgroundColor: "black"}}>
-			<Text style={styles.subtitle}>{this.state.respuesta}</Text>
+		<br/> 
+		{ !this.state.hide && <View>
+			<FileUploader
+				multiple={true}
+				handleChange={this.changeHandler}
+				name="file"
+				types={fileTypes}
+			/>
+			<Text style={styles.normal}>{this.state.file ? `File name: ${this.state.file.name}` : "Nigún archivo seleccionado aún"}</Text>
+			<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Cargar Archivo</button>
+			<br />
+		</View>}
+		<View style={{alignItems: "center"}}>
+			<Spinner radius={120} color={"#960035"} stroke={5} visible={this.state.hide} />
 		</View>
+			<Text style={styles.subtitle}>{this.state.respuesta}</Text>
 	</View>
 	  );
 	}
