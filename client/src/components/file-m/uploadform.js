@@ -8,7 +8,7 @@ import Spinner from 'react-spinner-material';
 
 const BASE_URL = 'http://localhost:3001/';
 const fileTypes = ["JPEG", "PNG", "JPG"];
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 
 
 
@@ -154,7 +154,7 @@ class U_form extends Component {
 			<br />
 		<View style={{alignItems: "center"}}>		
 		{<ReactAudioPlayer
-					src={"http://localhost:" + port + "/" + this.state.arroz}
+					src={"http://127.0.0.1:" + port + "/" + this.state.arroz}
 					autoPlay={false}
 					controls
 					/>} 
