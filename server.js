@@ -90,6 +90,9 @@ require('./config/passport')(passport);
 // Routes
 app.use('/api/users', users);
 
+// Make sounds public
+app.use(express.static(__dirname + '/sounds'));
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

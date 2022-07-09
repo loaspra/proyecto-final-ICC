@@ -8,6 +8,8 @@ import Spinner from 'react-spinner-material';
 
 const BASE_URL = 'http://localhost:3001/';
 const fileTypes = ["JPEG", "PNG", "JPG"];
+const port = process.env.PORT || 8080;
+
 
 
 var styles = StyleSheet.create({headline: {
@@ -152,7 +154,7 @@ class U_form extends Component {
 			<br />
 		<View style={{alignItems: "center"}}>		
 		{<ReactAudioPlayer
-					src={"http://localhost:8080/" + this.state.arroz}
+					src={"http://localhost:" + port + "/" + this.state.arroz}
 					autoPlay={false}
 					controls
 					/>} 
