@@ -39,16 +39,18 @@ app.use(cors());
 // @access private
 app.post('/upload', upload.single('file'), (req, res) => {
   User.updateOne({ _id: req.body.id }, {$inc: {rest: -1}}).then(response=> {
-		console.log("Respuesta de Base de datos: "  + response);
+		console.log("Respuesta de BD (updateOne): "  + response);
   })
 
   User.findOne({ _id: req.body.id }).then(user => {
-    restantes = user.rest
+    restantes = user.rest;
+    console.log("Respusta de BD (findOne): " + user)
   });
 
   if (req.file)
   {   
     const pythonProcess = spawn('python',["./IA/ocr.py", req.file.filename]);
+    console.log("Entrando Python")
     pythonProcess.stdout.on('data', (data) => {
       // do something ?? 
             res.json({
@@ -92,7 +94,7 @@ app.use('/api/users', users);
 
 // Make sounds public
 app.use(express.static(__dirname + '/sounds'));
-
+express
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
