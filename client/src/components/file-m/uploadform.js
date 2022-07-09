@@ -1,23 +1,14 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {Text, StyleSheet, View} from  'react-native';
 import { FileUploader } from "react-drag-drop-files";
 import axios from 'axios';
 import './styles.css';
-import { styled } from '@mui/material/styles';
-import { Box, alpha} from "@mui/material";
+import ReactAudioPlayer from 'react-audio-player';
 import Spinner from 'react-spinner-material';
-import Paper from '@mui/material/Paper';
 
 const BASE_URL = 'http://localhost:3001/';
 const fileTypes = ["JPEG", "PNG", "JPG"];
 
-const Item = styled(Paper)(({ theme }) => ({
-	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#EEE',
-	...theme.typography.body2,
-	padding: theme.spacing(1),
-	textAlign: 'center',
-	color: theme.palette.text.secondary,
-}));
 
 var styles = StyleSheet.create({headline: {
     textAlign: 'center', // <-- the magic
@@ -55,14 +46,15 @@ const stails ={
 
 class U_form extends Component {
 	constructor(props) {
-	
 	super(props);
 	  this.state = {
 		selectedFile: null,
 		respuesta: 'Aqui aparecera el texto identificado',
 		id: this.props.id,
 		rest: this.props.rest,
-		hide: false
+		hide: false,
+		sonido: false,
+		arroz: ""
 	  }   
 	};
 
@@ -85,29 +77,36 @@ class U_form extends Component {
 		  });
 		}
 	}
-	
-	fileUpload = () => {
-	const formData = new FormData(); 
-	if (this.state.rest <= 0) {
-		console.log("No tienes conversiones restantes")
+
+	TTS = () => {
+		this.setState({mostrar_s: true});
 		return;
 	}
-	this.setState({hide: true})
-	formData.append('file', this.state.selectedFile)    
-	formData.append('id', this.state.id)
 	
-	axios.post(BASE_URL + 'upload', formData)
-	  .then(res => {
-		// toast.success('File uploaded successfully')
-		// pass the name of the file as a parameter to the script (OCR)
-			this.setState({respuesta: res.data.results});
-			this.setState({rest: res.data.restante})
-			console.log("Conversiones restantes: " + this.state.rest);
-			this.forceUpdate();
-	  })
-	  .catch(err => {
-		console.log(err)
-	  })
+	fileUpload = () => {
+		const formData = new FormData(); 
+		if (this.state.rest <= 0) {
+			console.log("No tienes conversiones restantes")
+			return;
+		}
+		this.setState({hide: true})
+		formData.append('file', this.state.selectedFile)    
+		formData.append('id', this.state.id)
+		
+		axios.post(BASE_URL + 'upload', formData)
+		.then(res => {
+			// toast.success('File uploaded successfully')
+			// pass the name of the file as a parameter to the script (OCR)
+				this.setState({
+					respuesta: res.data.results,
+					rest: res.data.restante,
+					arroz: res.data.sound_to_play});
+				console.log("Conversiones restantes: " + this.state.rest);
+				this.forceUpdate();
+		})
+		.catch(err => {
+			console.log(err)
+		})
 	};
   
 	validateFileSize=(event)=>{
@@ -144,6 +143,13 @@ class U_form extends Component {
 			<Spinner radius={120} color={"#960035"} stroke={5} visible={this.state.hide} />
 		</View>
 			<Text style={styles.subtitle}>{this.state.respuesta}</Text>
+		<View style={{alignItems: "center"}}>		
+		{<ReactAudioPlayer
+					src={"http://localhost:8080/" + this.state.arroz}
+					autoPlay={false}
+					controls
+					/>} 
+		</View>				
 	</View>
 	  );
 	}

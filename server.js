@@ -24,7 +24,7 @@ var storage = multer.diskStorage({
       cb(null,  file.originalname);
   }
 });
-
+var sound_to_play = "";
 // handle upload 
 var upload = multer({ storage: storage });
 
@@ -54,7 +54,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
             res.json({
                 imageUrl: '/uploads/${req.file.filename}',
                 results: data.toString(),
-                restante: restantes
+                restante: restantes,
+                sound_to_play: data.toString().split("\n")[0]
             });
           }) 
   }
@@ -72,7 +73,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
-const MONGODB_URI = process.env.DB_URI || 'mongodb://localhost:27017/testing_proyecto';
+const MONGODB_URI = process.env.DB_URI || 'mongodb+srv://admin:203121745@cluster0.1dpbz.mongodb.net/test';
 
 // Connect to MongoDB
 mongoose
