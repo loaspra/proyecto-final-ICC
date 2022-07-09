@@ -97,7 +97,7 @@ class U_form extends Component {
 		formData.append('file', this.state.selectedFile)    
 		formData.append('id', this.state.id)
 		
-		axios.post('/upload', formData)
+		axios.post('http://127.0.0.1:3001/upload', formData)
 		.then(res => {
 			// toast.success('File uploaded successfully')
 			// pass the name of the file as a parameter to the script (OCR)
