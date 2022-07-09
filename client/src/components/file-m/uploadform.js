@@ -23,6 +23,12 @@ var styles = StyleSheet.create({headline: {
     backgroundColor: 'Gray',
 	color: 'white'},
 
+	rpta: { textAlign: 'left', // <-- the magic
+    fontSize: 20,
+    marginTop: 10,
+    backgroundColor: 'Gray',
+	color: 'white'},
+
 	normal: { textAlign: 'center', // <-- the magic
     fontSize: 13,
     marginTop: 5,
@@ -142,7 +148,8 @@ class U_form extends Component {
 		<View style={{alignItems: "center"}}>
 			<Spinner radius={120} color={"#960035"} stroke={5} visible={this.state.hide} />
 		</View>
-			<Text style={styles.subtitle}>{this.state.respuesta}</Text>
+			<Text style={styles.rpta}>{this.state.respuesta}</Text>
+			<br />
 		<View style={{alignItems: "center"}}>		
 		{<ReactAudioPlayer
 					src={"http://localhost:8080/" + this.state.arroz}

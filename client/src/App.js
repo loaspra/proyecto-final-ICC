@@ -10,8 +10,6 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import OCRpage from "./components/OCR/OCRpage";
-import TTSpage from "./components/TTS/TTSpage";
 
 import './App.css';
 
@@ -46,8 +44,6 @@ class App extends Component {
 						<Route exact path="/login" component={Login} />
 						<Switch>
 							<PrivateRoute exact path="/dashboard" component={Dashboard} />
-							<PrivateRoute exact path="/OCR" component={OCRpage} />
-							<PrivateRoute exact path="/TTS" component={TTSpage} />
 						</Switch>
 					</div>
 				</Router>
