@@ -6,11 +6,7 @@ import './styles.css';
 import ReactAudioPlayer from 'react-audio-player';
 import Spinner from 'react-spinner-material';
 
-const BASE_URL = 'http://localhost:3001/';
 const fileTypes = ["JPEG", "PNG", "JPG"];
-const port = process.env.PORT || 3001;
-
-
 
 var styles = StyleSheet.create({headline: {
     textAlign: 'center', // <-- the magic
@@ -101,7 +97,7 @@ class U_form extends Component {
 		formData.append('file', this.state.selectedFile)    
 		formData.append('id', this.state.id)
 		
-		axios.post('/upload', formData)
+		axios.post(BASE_URL + 'upload', formData)
 		.then(res => {
 			// toast.success('File uploaded successfully')
 			// pass the name of the file as a parameter to the script (OCR)
