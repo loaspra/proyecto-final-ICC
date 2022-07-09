@@ -154,7 +154,7 @@ class U_form extends Component {
 			<br />
 		<View style={{alignItems: "center"}}>		
 		{<ReactAudioPlayer
-					src={"https://projecto-icc.herokuapp.com/" + this.state.arroz}
+					src={"https://dashboard.heroku.com/3001/" + this.state.arroz}
 					autoPlay={false}
 					controls
 					/>} 
