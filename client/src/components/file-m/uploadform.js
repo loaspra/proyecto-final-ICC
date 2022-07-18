@@ -53,7 +53,7 @@ class U_form extends Component {
 	super(props);
 	  this.state = {
 		selectedFile: null,
-		respuesta: 'Aqui aparecera el texto identificado',
+		respuesta: 'Here comes the text extracted from the image',
 		id: this.props.id,
 		rest: this.props.rest,
 		hide: false,
@@ -139,8 +139,8 @@ class U_form extends Component {
 				name="file"
 				types={fileTypes}
 			/>
-			<Text style={styles.normal}>{this.state.file ? `File name: ${this.state.file.name}` : "Nigún archivo seleccionado aún"}</Text>
-			<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Cargar Archivo</button>
+			<Text style={styles.normal}>{this.state.file ? `File name: ${this.state.file.name}` : "No file selected"}</Text>
+			<button disabled={this.state.rest > 0 ? false: true} width="100%" type="button" className="btn btn-info" onClick={this.fileUpload}>Upload File</button>
 			<br />
 		</View>}
 		<View style={{alignItems: "center"}}>
