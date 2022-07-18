@@ -57,16 +57,16 @@ class Landing extends React.Component {
 					<div style={stails.fadeIn}>
 						<View style={stails.big}>
 							<Box sx={stails.box}>
-								<Text style={stails.titleText}>Hola! Inicia Sesion o Registrate</Text>
+								<Text style={stails.titleText}>Hello!, Log In or Sign up</Text>
 								<br />
-								<Text style={stails.baseText}>¡Extrae texto de tus imágenes y conviértelo en audio!</Text>
+								<Text style={stails.baseText}>Extract Text from your Images and convert it to Sound!</Text>
 							{/* Links to Register & Login */}
 								<div>
 									{/* Register */}
-									<Link to="/register" className="btn registerButton">Registrarse</Link>
+									<Link to="/register" className="btn registerButton">Sign Up</Link>
 
 									{/* Login */}
-									<Link to="/login" className="btn loginButton">Iniciar Sesion</Link>
+									<Link to="/login" className="btn loginButton">Log In</Link>
 								</div>
 							</Box>
 						</View>
