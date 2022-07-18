@@ -104,14 +104,14 @@ class Register extends Component {
 				<Box sx={stails.box}>
 					<div className="row">
 						<div className="col-sm-3 returnHome">
-							<Link to="/" className="link"><i class="fas fa-backspace"></i> Inicio</Link>
+							<Link to="/" className="link"><i class="fas fa-backspace"></i>Home</Link>
 						</div>
 					</div>
 
 					<div className="row">
 						<div className="col-10 offset-1 text-center registerText">
-							<h3>Registrate como nuevo usuario</h3>
-							<p>¿Ya tienes una cuenta? <Link to="/login" className="link">Inicia sesión</Link></p>
+							<h3>Create your account</h3>
+							<p>Already have an account? <Link to="/login" className="link">Log in</Link></p>
 						</div>
 					</div>
 
@@ -120,7 +120,7 @@ class Register extends Component {
 							<form noValidate onSubmit={this.onSubmit}>
 								{/* Name */}
 								<div className="col-8 offset-2">
-									<label htmlFor="name">Nombre:</label>
+									<label htmlFor="name">Name:</label>
 									<span className="text-light">{errors.name}</span>
 									<input
 										type="text"
@@ -129,13 +129,13 @@ class Register extends Component {
 										error={errors.name}
 										id="name"
 										className={classnames("form-control", { invalid: errors.name })}
-										placeholder="Ingresa tu nombre"
+										placeholder="Your name"
 									/>
 								</div>
 
 								{/* Email */}
 								<div className="col-8 offset-2">
-									<label htmlFor="email">Correo:</label>
+									<label htmlFor="email">Email:</label>
 									<span className="text-light">{errors.email}</span>
 									<input
 										type="email"
@@ -144,13 +144,13 @@ class Register extends Component {
 										error={errors.email}
 										id="email"
 										className={classnames("form-control", { invalid: errors.email })}
-										placeholder="Ingresa tu correo"
+										placeholder="Your email"
 									/>
 								</div>
 
 								{/* Password */}
 								<div className="col-8 offset-2">
-									<label htmlFor="password">Contraseña:</label>
+									<label htmlFor="password">Password:</label>
 									<span className="text-light">{errors.password}</span>
 									<input
 										type="password"
@@ -159,13 +159,13 @@ class Register extends Component {
 										error={errors.password}
 										id="password"
 										className={classnames("form-control", { invalid: errors.password })}
-										placeholder="Crea una contraseña"
+										placeholder="Create a password"
 									/>
 								</div>
 
 								{/* Validate password */}
 								<div className="col-8 offset-2">
-									<label htmlFor="password2">Confirmar contraseña:</label>
+									<label htmlFor="password2">Confirm password:</label>
 									<span className="text-light">{errors.password2}</span>
 									<input
 										type="password"
@@ -174,14 +174,14 @@ class Register extends Component {
 										error={errors.password2}
 										id="password2"
 										className={classnames("form-control", { invalid: errors.password2 })}
-										placeholder="Repite tu contraseña"
+										placeholder="Re-enter your password"
 									/>
 								</div>
 
 								{/* Submit button */}
 								<div className="col-8 offset-2">
 									<button className="btn signupbtn" type="submit">
-										Registrarse
+										Sign up
 									</button>
 								</div>
 							</form>
