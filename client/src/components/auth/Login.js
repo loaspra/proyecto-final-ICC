@@ -100,7 +100,7 @@ class Login extends Component {
 				<Box sx={stails.box}>
 					<div className="row">
 						<div className="col-sm-3 returnHome">
-							<Link to="/" className="link"><i className="fas fa-backspace"></i> Inicio</Link>
+							<Link to="/" className="link"><i className="fas fa-backspace"></i> Home</Link>
 						</div>
 					</div>
 
