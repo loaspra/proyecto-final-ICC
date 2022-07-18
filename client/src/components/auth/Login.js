@@ -106,8 +106,8 @@ class Login extends Component {
 
 					<div className="row">
 						<div className="col-10 offset-1 text-center loginText">
-							<h3>Inicia sesión</h3>
-							<p>No tienes una cuenta? <Link to="/register" className="link">Registrar</Link></p>
+							<h3>Log in</h3>
+							<p>Don't have an account? <Link to="/register" className="link">Sign up</Link></p>
 						</div>
 					</div>
 
@@ -116,7 +116,7 @@ class Login extends Component {
 							<form noValidate onSubmit={this.onSubmit}>
 								{/* Email */}
 								<div className="col-8 offset-2">
-									<label htmlFor="email">Correo:</label>
+									<label htmlFor="email">Email:</label>
 									<span className="text-danger">{errors.email} {errors.emailnotfound}</span>
 									<input
 										type="email"
@@ -127,13 +127,13 @@ class Login extends Component {
 										className={classnames("form-control", { 
 											invalid: errors.email || errors.emailnotfound 
 										})}
-										placeholder="Ingresa tu correo"
+										placeholder="Enter your email"
 									/>
 								</div>
 
 								{/* Password */}
 								<div className="col-8 offset-2">
-									<label htmlFor="password">Contraseña:</label>
+									<label htmlFor="password">Password:</label>
 									<span className="text-danger">{errors.password} {errors.passwordincorrect}</span>
 									<input
 										type="password"
@@ -144,14 +144,14 @@ class Login extends Component {
 										className={classnames("form-control", {
 											invalid: errors.password || errors.passwordincorrect
 										})}
-										placeholder="Ingresa tu contraseña"
+										placeholder="Enter your Password"
 									/>
 								</div>
 
 								{/* Submit button */}
 								<div className="col-8 offset-2">
 									<button className="btn loginbtn" type="submit">
-										Iniciar Sesión
+										Sign in
 									</button>
 								</div>
 							</form>
