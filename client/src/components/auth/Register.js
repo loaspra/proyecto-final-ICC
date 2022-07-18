@@ -110,7 +110,7 @@ class Register extends Component {
 
 					<div className="row">
 						<div className="col-10 offset-1 text-center registerText">
-							<h3>Create your account</h3>
+							<h3>Create a new account</h3>
 							<p>Already have an account? <Link to="/login" className="link">Log in</Link></p>
 						</div>
 					</div>
