@@ -129,8 +129,8 @@ class U_form extends Component {
 	render() {
 	  return (
 	<View sx={stails.big}>
-		<Text style={styles.subtitle}>Te quedan {this.state.rest} conversiones a texto restantes</Text>
-		<Text style={styles.subtitle}>Carga del Archivo</Text>
+		<Text style={styles.subtitle}>You have {this.state.rest} OCR conversions left</Text>
+		<Text style={styles.subtitle}>Upload your Image</Text>
 		<br/> 
 		{ !this.state.hide && <View>
 			<FileUploader
