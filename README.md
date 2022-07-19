@@ -1,6 +1,7 @@
 # Machine Learning Microsevices
 
 This web app serves both TTS and OCR services in a web app. 
+![welcome](https://user-images.githubusercontent.com/40249960/179645006-34b9080b-928a-4d22-ba40-5a26214d52e4.jpg)
 
 ---
 
@@ -30,6 +31,8 @@ After succcessfully login in, an API key will be stored on the client's browser,
 #### Microservices
 
 THis app offers TTS (Texto To Spech) and OCR (Optical Character recognition) services. First, the User uploads a image/photo that contains text and then click "Submit". Then, on the server side, a python script is invoked to process the image. 
+
+![conversions](https://user-images.githubusercontent.com/40249960/179645028-d835b40c-7431-456d-aa66-85925423396e.jpg)
 
 After the processing, the script uses Keras Ocr library to extract text from the image, sending the response as a string to the client side. If the User Decides to 
 use the TTS player, the ".wav" file (created as a temp file on the server by the script) is streamed to the client, and then displayed on the sound player.
